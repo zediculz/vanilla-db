@@ -1,8 +1,8 @@
 {
   "name": "vanilla-db",
-  "version": "0.0.14",
-  "description": "browser based database",
-  "author": "",
+  "version": "0.0.2",
+  "description": "browser based database, vanilla-Db is built on browsers localStorage, sessionStorage and indexedDB",
+  "author": "seyifunmitan muyiwa",
   "license": "MIT",
   "repository": "/vanilla-db",
   "main": "dist/index.js",
@@ -49,5 +49,8 @@
   },
   "files": [
     "dist"
+  ],
+  "keywords": [
+    "localStorage", "sessionStorage", "browser", "database", "frontend", "indexedDB"
   ]
 }

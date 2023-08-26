@@ -13,21 +13,50 @@ npm install --save vanilla-db
 ## Usage
 
 ```jsx
-import React, { Component } from 'react'
+import React, { Component, useState, UseEffect } from 'react'
 
 import { vanillaDb } from 'vanilla-db'
 
-class Example extends Component {
+const Example = e => {
+  const [data, setData] = useState(null)
 
   const addData = e => {
-    vanillaDb.set('local', data)
+
+    const config = {
+      db: 'local' || 'session',
+      key: 'data key',
+      data: 'your data here'
+    }
+
+    vanillaDb.set(config)
+
   }
 
+  useEffect(() => {
+
+    const query = {
+      db: 'local',  // 'session'
+      key: 'data key'
+    }
+
+    let res = vanillaDb.get(query)
+    setData(res)
+
+  }, [])
+
   render() {
-    return <yourComponent />
+    return <yourComponent data={data} />
   }
 }
+
 ```
+Once the package is installed, you can import the library using `import`
+
+```js
+import { vanillaDb } from 'vanilla-db'
+```
+
+````
 
 ## License
 

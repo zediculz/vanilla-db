@@ -20,7 +20,7 @@ export class CreateStore {
   // eslint-disable-next-line no-useless-constructor
   constructor() {}
 
-  // EXA works
+  // work
   set(config) {
     // query config to set data
     // db: 'database choice local or session',
@@ -30,9 +30,10 @@ export class CreateStore {
     // data can be number, string and object
     if (typeof data === 'object') {
       const s = {
-        time: Date(),
+        date: Date(),
         data,
-        key
+        key,
+        object: true
       }
 
       if (db === 'session') {
@@ -43,13 +44,14 @@ export class CreateStore {
         return true
       }
     } else {
+      // data can be number, string and object
       const s = {
-        time: Date(),
+        date: Date(),
         data,
-        key
+        key,
+        object: false
       }
 
-      // data can be number, string and object
       if (db === 'session') {
         CreateStore._sessionSet(key, JSON.stringify(s))
         return true
@@ -77,7 +79,7 @@ export class CreateStore {
     }
   }
 
-  static async _sessionSet(key, data) {
+  static _sessionSet(key, data) {
     sessionStorage.setItem(key, data)
   }
 
@@ -106,7 +108,7 @@ export class CreateStore {
   sync(key) {
     // sync store session data to local storage
     const query = { db: 'session', key }
-    const { data } = this.get(query)
+    const data = this.get(query)
 
     const config = {
       db: 'local',
