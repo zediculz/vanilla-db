@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { Text, vanillaDb, Heading } from 'vanilla-db'
-import 'vanilla-db/dist/index.css'
+import { vanillaDb } from 'vanilla-db'
 
 const App = () => {
   const [d, setD] = useState(null)
@@ -26,17 +25,15 @@ const App = () => {
 
   useEffect(() => {
     let _d = vanillaDb.get('local', 'data-sync')
-    let _dd = vanillaDb.get('session', 'data')
+    let _dd = vanillaDb.get('session', 'data-sync')
     const { key } = vanillaDb.secure('12345')
-    setK(key)
+   setK(key)
     console.log(_d, _dd, key)
     console.log(vanillaDb.length('local'))
   }, [])
 
   return (
     <div>
-      <Heading text="Heading Tag"/>
-      <Text text="Create React Library Example 😄" />
       <button onClick={handleClick}>Do something</button>
       <button onClick={handleSClick}>Do some sessions</button>
       <button onClick={handleSync}>Sync Data</button>

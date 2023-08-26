@@ -5,7 +5,7 @@
 // clear, length, removeItem
 // sync
 
-// set worked, get worked, sync
+// set worked, get worked, sync worked, length worked
 export class CreateStore {
   // eslint-disable-next-line no-useless-constructor
   constructor() {}

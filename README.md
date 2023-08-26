@@ -15,12 +15,16 @@ npm install --save vanilla-db
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'vanilla-db'
-import 'vanilla-db/dist/index.css'
+import { vanillaDb } from 'vanilla-db'
 
 class Example extends Component {
+
+  const addData = e => {
+    vanillaDb.set('local', data)
+  }
+
   render() {
-    return <MyComponent />
+    return <yourComponent />
   }
 }
 ```
