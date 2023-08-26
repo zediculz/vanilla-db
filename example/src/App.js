@@ -7,15 +7,30 @@ const App = () => {
   const [k, setK] = useState(null)
 
   const handleClick = e => {
-    vanillaDb.set('local', { key: 'data', data: { foo: 'bar' }})
+    const config = {
+      db: 'local',
+      key: 'data-l',
+      data: {
+        id: '002',
+        foo: 'bar'
+      }
+    }
+
+    vanillaDb.set(config)
   }
 
   const handleSClick = e => {
-    vanillaDb.set('session', { key: 'data-sync', data: { foo: {foo:'bar'} } })
+    const config = {
+      db: 'session',
+      key: 'data-s',
+      data: { foo: { foo: 'baracgh' } }
+    }
+
+    vanillaDb.set(config)
   }
 
   const handleSync= e => {
-    vanillaDb.sync('data-sync')
+    vanillaDb.sync('data-s')
   }
 
   const handleSecure = e => {
@@ -24,12 +39,13 @@ const App = () => {
   }
 
   useEffect(() => {
-    let _d = vanillaDb.get('local', 'data-sync')
-    let _dd = vanillaDb.get('session', 'data-sync')
-    const { key } = vanillaDb.secure('12345')
-   setK(key)
-    console.log(_d, _dd, key)
-    console.log(vanillaDb.length('local'))
+    const query = {
+      db: 'local',
+      key: 'data-l'
+    }
+    const d = vanillaDb.get(query)
+    console.log(d)
+    console.log(vanillaDb)
   }, [])
 
   return (

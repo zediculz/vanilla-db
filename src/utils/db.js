@@ -1,31 +1,44 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-// local and session storage
-// set, get local and session storage
-// clear, length, removeItem
-// sync
+// set, get, remove, update, length, sync
 
-// set worked, get worked, sync worked, length worked
+// preconfig
+const config = {
+  db: 'local',
+  key: 'data',
+  data: 'your data here'
+}
+
+// query
+const query = {
+  db: 'local',
+  key: 'data'
+}
+
 export class CreateStore {
   // eslint-disable-next-line no-useless-constructor
   constructor() {}
 
   // EXA works
-  set(type, opt) {
-    const { key, data } = opt
+  set(config) {
+    // query config to set data
+    // db: 'database choice local or session',
+    // key: 'database key', data: 'data to store
+    const { db, key, data } = config
 
     // data can be number, string and object
     if (typeof data === 'object') {
       const s = {
         time: Date(),
         data,
-        key,
-        isObj: true
+        key
       }
-      if (type === 'session') {
+
+      if (db === 'session') {
         CreateStore._sessionSet(key, JSON.stringify(s))
         return true
-      } else if (type === 'local') {
+      } else if (db === 'local') {
         CreateStore._localSet(key, JSON.stringify(s))
         return true
       }
@@ -37,10 +50,10 @@ export class CreateStore {
       }
 
       // data can be number, string and object
-      if (type === 'session') {
+      if (db === 'session') {
         CreateStore._sessionSet(key, JSON.stringify(s))
         return true
-      } else if (type === 'local') {
+      } else if (db === 'local') {
         CreateStore._localSet(key, JSON.stringify(s))
         return true
       }
@@ -48,20 +61,19 @@ export class CreateStore {
   }
 
   // EXA works
-  get(type, key) {
-    if (type === 'local') {
-      // eslint-disable-next-line no-undef
+  get(query) {
+    // query config to get data
+    // db: 'database choice local or session', key: 'database key'
+    const { db, key } = query
+
+    if (db === 'local') {
       const res = localStorage.getItem(key)
       const { data } = JSON.parse(res)
-      return {
-        data
-      }
-    } else if (type === 'session') {
+      return data
+    } else if (db === 'session') {
       const res = sessionStorage.getItem(key)
       const { data } = JSON.parse(res)
-      return {
-        data
-      }
+      return data
     }
   }
 
@@ -74,42 +86,43 @@ export class CreateStore {
   }
 
   // EXA
-  clear(type, key) {
-    if (type === 'local') {
+  remove(db, key) {
+    if (db === 'local') {
       CreateStore._CLEANER('local', key)
-    } else if (type === 'session') {
+    } else if (db === 'session') {
       CreateStore._CLEANER('session', key)
     }
   }
 
-  static async _CLEANER(type, key) {
+  static _CLEANER(type, key) {
     if (type === 'local') {
-      // eslint-disable-next-line no-undef
       localStorage.removeItem(key)
     } else if (type === 'session') {
-      // eslint-disable-next-line no-undef
       sessionStorage.removeItem(key)
     }
   }
 
-  /* EXA works */
+  /* EXA */
   sync(key) {
-    // the link that sync data if triggered
-    // sync session data to local
-    // get value thats linked with key and sync enabled
-    // then call syncmanager to store in local
+    // sync store session data to local storage
+    const query = { db: 'session', key }
+    const { data } = this.get(query)
 
-    const { data } = this.get('session', key)
-    this.set('local', { key, data: data })
-    this.clear('session', key)
+    const config = {
+      db: 'local',
+      key,
+      data
+    }
+    this.set(config)
+    this.remove('session', key)
     return true
   }
 
   // length of data EXA
-  length(type) {
-    if (type === 'local') {
+  length(db) {
+    if (db === 'local') {
       return localStorage.length
-    } else if (type === 'session') {
+    } else if (db === 'session') {
       return sessionStorage.length
     }
   }
@@ -119,25 +132,39 @@ export class CreateStore {
     // return user hashed hash key and retrieve it
     // generate new key
 
-    const hashedkey = 'sessionhashedkeyexample'
-
+    const _Gen = () => {
+      const num = Math.floor(Math.random * 999)
+      return Math.floor(Math.random * 9999999) * num
+    }
+    const hashedkey = _Gen()
     const data = {
       hashedkey,
       api
     }
 
-    this.set('session', { key: 'user-session', data })
+    const config = {
+      db: 'session',
+      key: 'user-session',
+      data
+    }
+
+    this.set(config)
     return {
       key: hashedkey
     }
   }
 
   // return the stored api key
-  user(key) {
-    const { data } = this.get('session', 'user-session')
+  user() {
+    const query = { db: 'session', key: 'user-session' }
+    const { data } = this.get(query)
     if (data.hashedkey === key) {
       return {
-        api: data.api
+        user: data.api
+      }
+    } else {
+      return {
+        user: null
       }
     }
   }
