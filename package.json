@@ -1,7 +1,7 @@
 {
   "name": "vanilla-db",
-  "version": "0.0.2",
-  "description": "browser based database, vanilla-Db is built on browsers localStorage, sessionStorage and indexedDB",
+  "version": "0.0.21",
+  "description": "VanillaDB is a tiny browser-based database library that is built on localstorage, sessionStorage and indexedDB",
   "author": "seyifunmitan muyiwa",
   "license": "MIT",
   "repository": "/vanilla-db",
