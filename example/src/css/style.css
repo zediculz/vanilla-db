@@ -73,7 +73,7 @@ body {
       display: flex;
       flex-direction: column-reverse;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: flex-end;
       overflow: scroll;
       & div {
          width: 90%;
