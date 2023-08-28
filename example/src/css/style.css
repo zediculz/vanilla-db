@@ -1,0 +1,130 @@
+
+body {
+   font-family: sans-serif;
+   margin: 0;
+}
+
+@media screen and (max-width: 425px) {
+   .container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+   }
+
+   header {
+      width: 100%;
+      height: 10vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & .logo-wrap {
+         width: 45%;
+         height: 90%;
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+         & h1 {
+            font-size: 20px;
+         }
+      }
+
+      & .menu-btn-wrap {
+         width: 45%;
+         height: 90%;
+         display: flex;
+         align-items: center;
+         justify-content: flex-end;
+         & p {
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+         }
+      }
+   }
+
+   .nav {
+      width: 100%;
+      height: 300px;
+      border-bottom: 1px solid #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      & ul {
+         width: 100%;
+         height: 100%;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+        
+         & li {
+            width: 100%;
+            height: 45px;
+            list-style: none;
+         }
+      }
+   }
+
+   .flatlist-wrap {
+      width: 100%;
+      height: 500px;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: scroll;
+      & div {
+         width: 90%;
+         height: 60px;
+         margin-bottom: 6px;
+         display: flex;
+         align-items: center;
+         justify-content: flex-start;
+         & p {
+            font-size: 17px;
+            text-transform: capitalize;
+         }
+
+         & span {
+            padding-left: 12px;
+         }
+      }
+   }
+
+   .form {
+      width: 90%;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      & div {
+         width: 78%;
+         height: 90%;
+         & input {
+            width: 96%;
+            height: 90%;
+            outline: none;
+            border: 1px solid #000;
+            border-radius: 6px;
+            padding-left: 6px;
+            font-size: 18px;
+         }
+      }
+
+      & div:nth-child(2) {
+         width: 20%;
+         height: 90%;
+         & button {
+            width: 90%;
+            height: 100%;
+            outline: none;
+            border: 1px solid #000;
+            border-radius: 6px;
+            background-color: #000;
+            color: #fff;
+         }
+      }
+   }
+}
