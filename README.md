@@ -35,7 +35,7 @@ const query = {
   key: 'your database key',
 }
 
-vanillaDb.set(query)
+vanillaDb.get(query)
 
 ```
 query contains the Database you stored data in and the database key.
