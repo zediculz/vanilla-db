@@ -3,7 +3,7 @@
 // create an object inside the db
 // set and get data stored inside the db objects
 
-export class DB {
+export class CreateiStore {
   // eslint-disable-next-line no-useless-constructor
   constructor() {}
 
@@ -12,6 +12,11 @@ export class DB {
   // object name
   // create db, crate object all from schema
   create(schema) {
+    const preschema = {
+      db: 'database',
+      version: 'version',
+      object: 'object'
+    }
     this.schema = schema
     const { db, version, object } = schema
     const _DB = indexedDB.open(db, version)

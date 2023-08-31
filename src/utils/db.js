@@ -1,3 +1,5 @@
+/* eslint-disable no-useless-constructor */
+/* eslint-disable constructor-super */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
@@ -83,12 +85,18 @@ export class CreateStore {
     sessionStorage.setItem(key, data)
   }
 
-  static async _localSet(key, data) {
+  static _localSet(key, data) {
     localStorage.setItem(key, data)
   }
 
   // EXA
-  remove(db, key) {
+  remove(query) {
+    // remove preconfig
+    const preconfig = {
+      db: 'db',
+      key: 'key'
+    }
+    const { db, key } = query
     if (db === 'local') {
       CreateStore._CLEANER('local', key)
     } else if (db === 'session') {
@@ -105,18 +113,34 @@ export class CreateStore {
   }
 
   /* EXA */
-  sync(key) {
+  sync(config) {
+    // preconfig
+    const preconfig = {
+      from: 'session',
+      to: 'local',
+      key: 'key',
+      options: {
+        deleteOld: true,
+        newKey: 'new-key'
+      }
+    }
+    // sync config
+    const { from, to, key, options } = config
+    const { newKey, deleteOld } = options
     // sync store session data to local storage
-    const query = { db: 'session', key }
+    // ability to sync back and forth
+    const query = { db: from, key }
     const data = this.get(query)
 
-    const config = {
-      db: 'local',
-      key,
+    const _config = {
+      db: to,
+      key: newKey === '' || null ? key : newKey,
       data
     }
-    this.set(config)
-    this.remove('session', key)
+    this.set(_config)
+    if (deleteOld) {
+      this.remove(from, key)
+    }
     return true
   }
 
@@ -129,45 +153,30 @@ export class CreateStore {
     }
   }
 
-  secure(api) {
-    // store user session during there stay in a app
-    // return user hashed hash key and retrieve it
-    // generate new key
-
-    const _Gen = () => {
-      const num = Math.floor(Math.random * 999)
-      return Math.floor(Math.random * 9999999) * num
-    }
-    const hashedkey = _Gen()
-    const data = {
-      hashedkey,
-      api
-    }
-
-    const config = {
-      db: 'session',
-      key: 'user-session',
-      data
-    }
-
-    this.set(config)
-    return {
-      key: hashedkey
-    }
-  }
-
-  // return the stored api key
-  user() {
-    const query = { db: 'session', key: 'user-session' }
-    const { data } = this.get(query)
-    if (data.hashedkey === key) {
-      return {
-        user: data.api
-      }
-    } else {
-      return {
-        user: null
+  request(config) {
+    // make request to get a data most get request, storage the data in db like caching
+    // preconfig
+    const preconfig = {
+      url: 'local',
+      db: 'local', // session,
+      key: 'data',
+      options: {
+        // fetch options
       }
     }
+
+    const { url, db, key, options } = config
+
+    fetch(url)
+      .then((res) => res.json())
+      .then(async (data) => {
+        const _config = {
+          db,
+          key,
+          data
+        }
+
+        this.set(_config)
+      })
   }
 }

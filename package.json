@@ -1,6 +1,6 @@
 {
   "name": "vanilla-db",
-  "version": "0.0.21.1",
+  "version": "0.0.3",
   "description": "VanillaDB is a tiny browser-based database library that is built on localstorage, sessionStorage and indexedDB",
   "author": "seyifunmitan muyiwa",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "deploy": "gh-pages -d example/build"
   },
   "peerDependencies": {
-    "react": "^16.0.0"
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
     "microbundle-crl": "^0.13.10",

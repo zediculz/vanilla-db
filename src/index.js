@@ -1,5 +1,24 @@
 /* eslint-disable no-undef */
 import { CreateStore } from './utils/db.js'
+import { SessionManager } from './utils/session.js'
 
-// set, get, sync, remove, length
-export const vanillaDb = new CreateStore()
+// set(config),
+// get(query),
+// sync(config),
+// remove(db, key),
+// length(db)
+// request
+const vanillaDb = new CreateStore()
+
+// auth(api)
+// user(key)
+
+const Session = new SessionManager()
+
+// indexedDb
+// set(config),
+// get(query),
+// code is broken
+// const Db = new CreateiStore()
+
+export { vanillaDb, Session }
