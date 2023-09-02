@@ -13,7 +13,7 @@ const vanillaDb = new CreateStore()
 // auth(api)
 // user(key)
 
-const Session = new SessionManager()
+// const Session = new SessionManager()
 
 // indexedDb
 // set(config),
@@ -21,4 +21,4 @@ const Session = new SessionManager()
 // code is broken
 // const Db = new CreateiStore()
 
-export { vanillaDb, Session }
+export { vanillaDb }

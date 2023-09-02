@@ -3,70 +3,36 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 
-// set, get, remove, update, length, sync
-
-// preconfig
-const config = {
-  db: 'local',
-  key: 'data',
-  data: 'your data here'
-}
-
-// query
-const query = {
-  db: 'local',
-  key: 'data'
-}
-
+// set, get, remove, update, length, sync, request
 export class CreateStore {
   // eslint-disable-next-line no-useless-constructor
   constructor() {}
 
-  // work
+  // work 0.0.4
   set(config) {
-    // query config to set data
-    // db: 'database choice local or session',
-    // key: 'database key', data: 'data to store
+    // config to set data
+    // db: 'database choice local or session', key: 'database key', data: 'data to store
     const { db, key, data } = config
-
     // data can be number, string and object
-    if (typeof data === 'object') {
-      const s = {
-        date: Date(),
-        data,
-        key,
-        object: true
-      }
+    const src = {
+      time: Date(),
+      data,
+      key,
+      type: typeof data
+    }
 
-      if (db === 'session') {
-        CreateStore._sessionSet(key, JSON.stringify(s))
-        return true
-      } else if (db === 'local') {
-        CreateStore._localSet(key, JSON.stringify(s))
-        return true
-      }
-    } else {
-      // data can be number, string and object
-      const s = {
-        date: Date(),
-        data,
-        key,
-        object: false
-      }
-
-      if (db === 'session') {
-        CreateStore._sessionSet(key, JSON.stringify(s))
-        return true
-      } else if (db === 'local') {
-        CreateStore._localSet(key, JSON.stringify(s))
-        return true
-      }
+    if (db === 'session') {
+      CreateStore._sessionSet(key, JSON.stringify(src))
+      return true
+    } else if (db === 'local') {
+      CreateStore._localSet(key, JSON.stringify(src))
+      return true
     }
   }
 
-  // EXA works
+  // works 0.0.4
   get(query) {
-    // query config to get data
+    // query to get data
     // db: 'database choice local or session', key: 'database key'
     const { db, key } = query
 
@@ -89,42 +55,22 @@ export class CreateStore {
     localStorage.setItem(key, data)
   }
 
-  // EXA
+  // work 0.0.4
   remove(query) {
     // remove preconfig
-    const preconfig = {
-      db: 'db',
-      key: 'key'
-    }
+    // db: 'database choice local or session', key: 'database key'
     const { db, key } = query
     if (db === 'local') {
-      CreateStore._CLEANER('local', key)
-    } else if (db === 'session') {
-      CreateStore._CLEANER('session', key)
-    }
-  }
-
-  static _CLEANER(type, key) {
-    if (type === 'local') {
       localStorage.removeItem(key)
-    } else if (type === 'session') {
+    } else if (db === 'session') {
       sessionStorage.removeItem(key)
     }
   }
 
-  /* EXA */
+  // work 0.0.4
   sync(config) {
-    // preconfig
-    const preconfig = {
-      from: 'session',
-      to: 'local',
-      key: 'key',
-      options: {
-        deleteOld: true,
-        newKey: 'new-key'
-      }
-    }
     // sync config
+    // from: 'database to sync from, to: database to sync data to, key: 'database key', options: 'to delete the old data and set new key if neccessary'
     const { from, to, key, options } = config
     const { newKey, deleteOld } = options
     // sync store session data to local storage
@@ -134,17 +80,17 @@ export class CreateStore {
 
     const _config = {
       db: to,
-      key: newKey === '' || null ? key : newKey,
+      key: newKey === '' || newKey === null ? key : newKey,
       data
     }
     this.set(_config)
     if (deleteOld) {
-      this.remove(from, key)
+      this.remove(query)
     }
     return true
   }
 
-  // length of data EXA
+  // length of data work 0.0.4
   length(db) {
     if (db === 'local') {
       return localStorage.length
@@ -156,18 +102,10 @@ export class CreateStore {
   request(config) {
     // make request to get a data most get request, storage the data in db like caching
     // preconfig
-    const preconfig = {
-      url: 'local',
-      db: 'local', // session,
-      key: 'data',
-      options: {
-        // fetch options
-      }
-    }
-
+    // db: 'database choice local or session', key: 'database key', url: 'api link to fetch data mostly get', options: 'fetch options if neccessary'
     const { url, db, key, options } = config
 
-    fetch(url)
+    fetch(url, options)
       .then((res) => res.json())
       .then(async (data) => {
         const _config = {

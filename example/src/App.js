@@ -1,8 +1,9 @@
 import React, {useEffect, useState } from 'react'
-import { vanillaDb, Session } from 'vanilla-db'
+import { vanillaDb } from 'vanilla-db'
 
 const App = () => {
-  const [k, setK] = useState('')
+  const [players, setPlayers] = useState([])
+  const [player, setPlayer] = useState('')
   useEffect(() => {
     //fetch('https://dummyjson.com/products').then(res => res.json()).then(r => console.log(r))
     const config = {
@@ -14,24 +15,50 @@ const App = () => {
       }
     }
 
-    //vanillaDb.request(config)
+    vanillaDb.request(config)
   }, [])
 
   useEffect(() => {
-    //const key = Session.manage('apikeyexamplebeingstored')
-   //console.log(key)
-  }, [])
+    const query = {
+      db: 'local',
+      key: 'players-roaster'
+    }
+
+    const data = vanillaDb.get(query)
+    setPlayers(data)
+  }, [player])
 
   const handle = e => {
-    const f = Session.user(3929163103280)
-    console.log(f)
+    e.preventDefault()
+
+    const data = [...players, { id: Math.floor(Math.random() * 9999999), name: player }]
+
+    const config = {
+      db: 'local',
+      key: 'players-roaster',
+      data
+    }
+    vanillaDb.set(config)
+    setPlayer('')
   }
 
-
   return (
-    <div>
-      <button onClick={handle}>Do something</button>
-  </div>
+    <div className="container">
+      <h1>Roaster List </h1>
+      <form onSubmit={handle}>
+        <input placeholder="players name" type="text" value={player} onChange={e => setPlayer(e.target.value)} />
+        <button>Add Player</button>
+      </form>
+      <p>{players.length} total numbers of players</p>
+      <div className="body">
+        {players.map(p => (
+          <div key={p.id}>
+            <h3>{p.name}</h3>
+          </div>
+        ))}
+      </div>
+      <i>{vanillaDb.length('local')} Local Database created.</i>
+    </div>
   )
 }
 
