@@ -1,13 +1,12 @@
 
-
 # VanillaDb
 
-VanillaDb is a tiny browser-based database library that is built on localstorage, sessionStorage, cookie (coming) and indexedDB (coming).
+VanillaDb is a tiny browser-based database library that is built on Browser local and session Storage.
+cookie (coming) and indexedDB (coming).
 
-VanillaDb is built for you to be albe to make use of Browser base storage seamlessly when required in your projects.
+VanillaDb is built for developers that want to make use of Browser storage seamlessly when required in their projects.
 
 ## Installation
-
 Install vanilla-DB using npm
 
 ```bash
@@ -28,7 +27,7 @@ const config = {
 
 vanillaDb.set(config)
 ```
-config contains database which can either be "local" or "session", your database key and the data you want to store into Database.
+config contains database which can either be "local" or "session", your database key and the data you want to store.
 
 ```javascript
 
@@ -77,8 +76,7 @@ query contains the database you stored your data and the key of the databsse you
 ## More Features
 
 - length(db) - return the length of data stored in Database
-- manage(apikey) - take your user api/auth key and return a fake key that represent the api key.
-- user(fkey) - return user managed apikey
+- request(db) - fetch data from api (mostly get) and store the data in database for offline usage.
 
 ### Usage/Examples
 
@@ -92,18 +90,20 @@ vanillaDb.length(db)
 ```
 db is the Database you stored data.
 
-
 ```javascript
-vanillaDb.manage(APIKEY)
+import { vanillaDb } from 'vanilla-db'
+
+const config =  {
+    url: 'api endpoint',
+    db: 'local' // 'session',
+    key: 'database key',
+    options: {'fetch request options'}
+}
+
+vanillaDb.request(db)
+
 ```
-where APIKEY is the auth key for your app user, return new fake key
-
-
-```javascript
-vanillaDb.user(FAKEKEY)
-```
-where FAKEKEY is the auth key generated for managed user
-
+db is the Database you stored data.
 
 
 [![NPM](https://img.shields.io/npm/v/vanilla-db.svg)](https://www.npmjs.com/package/vanilla-db) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)

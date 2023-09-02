@@ -1,10 +1,10 @@
 {
   "name": "vanilla-db",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "VanillaDB is a tiny browser-based database library that is built on localstorage, sessionStorage and indexedDB",
-  "author": "seyifunmitan muyiwa",
+  "author": "Seyifunmitan Muyiwa",
   "license": "MIT",
-  "repository": "/vanilla-db",
+  "repository": "https://github.com/Seyifunmitan/vanilla-db",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
