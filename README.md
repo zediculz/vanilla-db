@@ -100,14 +100,17 @@ const config =  {
     options: {'fetch request options'}
 }
 
-vanillaDb.request(db)
+vanillaDb.request(config)
 
 ```
 db is the Database you stored data.
 
 
 [![NPM](https://img.shields.io/npm/v/vanilla-db.svg)](https://www.npmjs.com/package/vanilla-db) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/burokku?label=bundle%20size&logo=webpack)](https://bundlephobia.com/result?p=burokku)
+[![Contact](https://img.shields.io/badge/contact-@zediculz-blue.svg?style=flat&logo=twitter)](https://twitter.com/zediculz)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/burokku?label=bundle%20size&logo=webpack)](https://bundlephobia.com/result?p=vanilla-db)
 
 ## License
 
-MIT © [](https://github.com/)
+MIT © [@Seyifunmitan](https://github.com/@Seyifunmitan)

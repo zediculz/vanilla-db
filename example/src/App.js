@@ -2,8 +2,11 @@ import React, {useEffect, useState } from 'react'
 import { vanillaDb } from 'vanilla-db'
 
 const App = () => {
+  // store all players
   const [players, setPlayers] = useState([])
+  // new player state
   const [player, setPlayer] = useState('')
+
   useEffect(() => {
     //fetch('https://dummyjson.com/products').then(res => res.json()).then(r => console.log(r))
     const config = {
@@ -31,7 +34,11 @@ const App = () => {
   const handle = e => {
     e.preventDefault()
 
-    const data = [...players, { id: Math.floor(Math.random() * 9999999), name: player }]
+    const data = [...players,
+      {
+        id: Math.floor(Math.random() * 9999999),
+        name: player
+      }]
 
     const config = {
       db: 'local',
@@ -46,7 +53,7 @@ const App = () => {
     <div className="container">
       <h1>Roaster List </h1>
       <form onSubmit={handle}>
-        <input placeholder="players name" type="text" value={player} onChange={e => setPlayer(e.target.value)} />
+        <input placeholder="player name" type="text" value={player} onChange={e => setPlayer(e.target.value)} />
         <button>Add Player</button>
       </form>
       <p>{players.length} total numbers of players</p>
