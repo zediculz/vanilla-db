@@ -81,7 +81,8 @@ export class CreateStore {
     const _config = {
       db: to,
       key: newKey === '' || newKey === null ? key : newKey,
-      data
+      data,
+      id: generate().SHORT
     }
     this.set(_config)
     if (deleteOld) {
@@ -117,4 +118,6 @@ export class CreateStore {
         this.set(_config)
       })
   }
+
+  // Struct hook to work with vanillaDb seamlessly like top level schema
 }

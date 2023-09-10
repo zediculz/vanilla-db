@@ -1,23 +1,18 @@
-import { CreateStore } from './db'
+/* eslint-disable prettier/prettier */
+import { CreateStore } from './db.js'
+import { generate } from '../asm/index.js'
+
 /* eslint-disable no-useless-constructor */
 export class SessionManager extends CreateStore {
   constructor() {
     super()
   }
 
-  manage(api) {
-    // preconfig
-    const preconfig = {
-      api: 'api',
-      options: {
-        expire: 'onclose' // persist
-      }
-    }
-
+  init(api) {
     // store user session during there stay in a app
     // return user hashed hash key and retrieve it
     // generate new key
-    const newkey = Math.floor(Math.random() * 9999999999999)
+    const newkey = generate()
 
     const data = {
       key: newkey,
@@ -26,7 +21,7 @@ export class SessionManager extends CreateStore {
 
     const config = {
       db: 'session',
-      key: 'user-session',
+      key: 'user-auth',
       data
     }
 
@@ -35,21 +30,15 @@ export class SessionManager extends CreateStore {
   }
 
   // return the stored api key
-  user(newkey) {
+  return(newkey) {
     const query = {
       db: 'session',
-      key: 'user-session'
+      key: 'user-auth'
     }
 
     const data = this.get(query)
-    if (data.key === newkey) {
-      return {
-        api: data.api
-      }
-    } else {
-      return {
-        user: null
-      }
-    }
+    const { api, key } = data 
+    if (key === newkey) return api 
+    return null
   }
 }

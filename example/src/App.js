@@ -1,11 +1,12 @@
 import React, {useEffect, useState } from 'react'
-import { vanillaDb } from 'vanilla-db'
+import { vanillaDb, vanillaAuth } from 'vanilla-db'
 
 const App = () => {
   // store all players
   const [players, setPlayers] = useState([])
   // new player state
   const [player, setPlayer] = useState('')
+  const [auth, setAuth] = useState('')
 
   useEffect(() => {
     //fetch('https://dummyjson.com/products').then(res => res.json()).then(r => console.log(r))
@@ -31,6 +32,10 @@ const App = () => {
     setPlayers(data)
   }, [player])
 
+  useEffect(() => {
+   ///vanillaAuth.init('mata')
+  }, [])
+
   const handle = e => {
     e.preventDefault()
 
@@ -49,6 +54,11 @@ const App = () => {
     setPlayer('')
   }
 
+  const doThis = () => {
+    const t = vanillaAuth.return("0x25996868qlUiGj430070djU")
+    setAuth(t)
+  }
+
   return (
     <div className="container">
       <h1>Roaster List </h1>
@@ -64,6 +74,8 @@ const App = () => {
           </div>
         ))}
       </div>
+      <h3>{auth}</h3>
+      <button onClick={doThis}>Do this {auth}</button>
       <i>{vanillaDb.length('local')} Local Database created.</i>
     </div>
   )
