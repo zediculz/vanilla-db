@@ -33,7 +33,7 @@ const App = () => {
   }, [player])
 
   useEffect(() => {
-   ///vanillaAuth.init('mata')
+   //vanillaAuth.init('mata')
   }, [])
 
   const handle = e => {
@@ -55,7 +55,7 @@ const App = () => {
   }
 
   const doThis = () => {
-    const t = vanillaAuth.return("0x25996868qlUiGj430070djU")
+    const t = vanillaAuth.return("0x5994599JbNH94386cH")
     setAuth(t)
   }
 

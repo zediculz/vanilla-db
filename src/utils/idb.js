@@ -17,6 +17,7 @@ export class CreateiStore {
       version: 'version',
       object: 'object'
     }
+  
     this.schema = schema
     const { db, version, object } = schema
     const _DB = indexedDB.open(db, version)
