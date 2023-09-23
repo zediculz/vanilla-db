@@ -5,5 +5,4 @@ import { SessionManager } from './utils/session.js'
 const vanillaDb = new CreateStore()
 const vanillaAuth = new SessionManager()
 
-
 export { vanillaDb, vanillaAuth }
