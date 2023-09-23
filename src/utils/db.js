@@ -41,11 +41,22 @@ export class CreateStore {
 
     if (db === 'local' || db === 'localStorage') {
       const res = localStorage.getItem(key)
-      const { data } = JSON.parse(res)
+      const _res = JSON.parse(res)
+      const { data } = _res
+
+      if (CreateStore.getOPT(option)) {
+        return _res
+      }
+
       return data
     } else if (db === 'session' || db === 'sessionStorage') {
       const res = sessionStorage.getItem(key)
-      const { data } = JSON.parse(res)
+      const _res = JSON.parse(res)
+      const { data } = _res
+      if (CreateStore.getOPT(option)) {
+        return _res
+      }
+
       return data
     } else {
       console.error(`Error: DB Error:${db} is not correct`)
@@ -58,6 +69,18 @@ export class CreateStore {
 
   static _localSet(key, data) {
     localStorage.setItem(key, data)
+  }
+
+  static getOPT(option) {
+    if (option === 'all') {
+      return true
+    } else if (option === 'only') {
+      return false
+    } else if (option === undefined || option === null) {
+      return false
+    } else {
+      console.error(`Error: OPTION Error:${option}: all || only`)
+    }
   }
 
   // work 0.0.4

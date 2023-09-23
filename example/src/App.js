@@ -24,16 +24,25 @@ const App = () => {
 
   useEffect(() => {
     const query = {
-      db: 'localstorage',
-      key: 'players-roaster'
+      db: 'localStorage',
+      key: 'players-roaster',
+      option: 'only'
     }
 
     const data = vanillaDb.get(query)
+    console.log(data)
     setPlayers(data)
   }, [player])
 
   useEffect(() => {
-   //vanillaAuth.init('something like this that needed to be secured')
+    //vanillaAuth.init('something like this that needed to be secured')
+    const query = {
+      db: 'session',
+      key: 'dummy-products'
+    }
+
+    const data = vanillaDb.get(query)
+    console.log(data)
   }, [])
 
   const handle = e => {
