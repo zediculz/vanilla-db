@@ -30,7 +30,7 @@ export class SessionManager extends CreateStore {
   }
 
   // return the stored api key
-  return(newkey) {
+  user(newkey) {
     const query = {
       db: 'session',
       key: 'user-auth'

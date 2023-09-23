@@ -33,7 +33,7 @@ const App = () => {
   }, [player])
 
   useEffect(() => {
-   //vanillaAuth.init('mata')
+   //vanillaAuth.init('something like this that needed to be secured')
   }, [])
 
   const handle = e => {
@@ -51,12 +51,24 @@ const App = () => {
       data
     }
     vanillaDb.set(config)
+   
     setPlayer('')
   }
 
   const doThis = () => {
-    const t = vanillaAuth.return("0x5994599JbNH94386cH")
+    const t = vanillaAuth.user("0x4785906qlUzX54026XZc")
     setAuth(t)
+  }
+
+  const handleDel = id => {
+    const remPlayers = players.filter(player => player.id !== id)
+    setPlayers(remPlayers)
+    const config = {
+      db: 'local',
+      key: 'players-roaster',
+      data: remPlayers
+    }
+    vanillaDb.set(config)
   }
 
   return (
@@ -71,6 +83,7 @@ const App = () => {
         {players.map(p => (
           <div key={p.id}>
             <h3>{p.name}</h3>
+            <button onClick={e => handleDel(p.id)}>delete</button>
           </div>
         ))}
       </div>

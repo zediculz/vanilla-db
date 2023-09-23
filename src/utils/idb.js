@@ -17,11 +17,10 @@ export class CreateiStore {
       version: 'version',
       object: 'object'
     }
-  
+
     this.schema = schema
     const { db, version, object } = schema
     const _DB = indexedDB.open(db, version)
-    this._DB = _DB
 
     _DB.onerror = (err) => console.error('error', err)
 
@@ -29,6 +28,10 @@ export class CreateiStore {
       const { name, config } = object
       const db = e.target.result
       db.createObjectStore(name, config)
+    }
+
+    _DB.onsuccess = (e) => {
+      this._DB = e
     }
   }
 
