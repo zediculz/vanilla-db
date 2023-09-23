@@ -1,6 +1,6 @@
 {
   "name": "vanilla-db",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "VanillaDB is a Tiny Browser-Based Database Tooling that is Built on top of localStorage, sessionStorage and indexedDB",
   "author": "Seyifunmitan Muyiwa",
   "license": "MIT",

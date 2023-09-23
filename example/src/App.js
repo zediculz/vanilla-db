@@ -24,7 +24,7 @@ const App = () => {
 
   useEffect(() => {
     const query = {
-      db: 'local',
+      db: 'localstorage',
       key: 'players-roaster'
     }
 

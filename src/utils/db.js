@@ -15,10 +15,12 @@ export class CreateStore {
     const { db, key, data } = config
     // data can be number, string and object
     const src = {
-      time: Date(),
       data,
       key,
-      type: typeof data
+      DBinfo: {
+        lastUpdated: new Date().toDateString(),
+        type: typeof data
+      }
     }
 
     if (db === 'session') {
@@ -34,16 +36,19 @@ export class CreateStore {
   get(query) {
     // query to get data
     // db: 'database choice local or session', key: 'database key'
-    const { db, key } = query
+    const { db, key, option } = query
+    // const _option = "all" || "only"
 
-    if (db === 'local') {
+    if (db === 'local' || db === 'localStorage') {
       const res = localStorage.getItem(key)
       const { data } = JSON.parse(res)
       return data
-    } else if (db === 'session') {
+    } else if (db === 'session' || db === 'sessionStorage') {
       const res = sessionStorage.getItem(key)
       const { data } = JSON.parse(res)
       return data
+    } else {
+      console.error(`Error: DB Error:${db} is not correct`)
     }
   }
 
@@ -84,9 +89,7 @@ export class CreateStore {
       data
     }
     this.set(_config)
-    if (deleteOld) {
-      this.remove(query)
-    }
+    if (deleteOld) this.remove(query)
     return true
   }
 
@@ -111,7 +114,8 @@ export class CreateStore {
         const _config = {
           db,
           key,
-          data
+          data,
+          url
         }
 
         this.set(_config)
