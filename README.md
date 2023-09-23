@@ -2,7 +2,6 @@
 # VanillaDb
 
 VanillaDb is a tiny browser-based database library that is built on Browser local and session Storage.
-cookie (coming) and indexedDB (coming).
 
 VanillaDb is built for developers that want to make use of Browser storage seamlessly when required in their projects.
 

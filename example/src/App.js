@@ -56,8 +56,8 @@ const App = () => {
   }
 
   const doThis = () => {
-    const t = vanillaAuth.user("0x4785906qlUzX54026XZc")
-    setAuth(t)
+    //const t = vanillaAuth.user("0x4785906qlUzX54026XZc")
+    //setAuth(t)
   }
 
   const handleDel = id => {

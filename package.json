@@ -4,7 +4,7 @@
   "description": "VanillaDB is a Tiny Browser-Based Database Tooling that is Built on top of localStorage, sessionStorage and indexedDB",
   "author": "Seyifunmitan Muyiwa",
   "license": "MIT",
-  "repository": "https://github.com/Seyifunmitan/vanilla-db",
+  "repository": "https://github.com/zediculz/vanilla-db",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
