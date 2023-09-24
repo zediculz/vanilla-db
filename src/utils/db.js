@@ -143,15 +143,14 @@ export class CreateStore {
       })
   }
 
-  auth(api) {
+  auth(auth) {
     // store user session during there stay in a app
     // return user hashed hash key and retrieve it
     // generate new key
     const newkey = generate()
-
     const data = {
       key: newkey,
-      api
+      auth
     }
 
     const config = {
