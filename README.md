@@ -9,12 +9,13 @@ VanillaDb is built for developers that want to make use of Browser storage seaml
 Install vanilla-DB using npm
 
 ```bash
-  npm install --save vanilla-db
+  npm install --save vanilla-db@latest
 ```
 
 ## Usage/Examples
 Once the package is installed, you can import the library using import
 
+### Store Data
 ```javascript
 import { vanillaDb } from 'vanilla-db'
 
@@ -26,20 +27,22 @@ const config = {
 
 vanillaDb.set(config)
 ```
-config contains database which can either be "local" or "session", your database key and the data you want to store.
+config contains db which can either be "local || localStorage" or "session || sessionStorage", your database key and the data you want to store.
 
+### Get Data
 ```javascript
-
 const query = {
   db: 'local' // 'session',
   key: 'your database key',
+  option: 'all' || 'only'
 }
 
 vanillaDb.get(query)
 
 ```
-query contains the database you stored your data and database key.
+query contains the db you stored your data and database key, and the option to either return all db or only data stored.
 
+### Sync Data
 ```javascript
 import { vanillaDb } from 'vanilla-db'
 
@@ -55,11 +58,16 @@ const config = {
 
 vanillaDb.sync(config)
 ```
-config contains the from, database you can are syncing from which can either be local or session, to, is the new database you are syncing to, key is the key of the database you want to sync.
+config contains the database you can are syncing from which can either be local or session, to, is the new database you are syncing to, key is the key of the database you want to sync.
 
 options contains deleteOld which can either be true or false to delete old stored data, and newKey for the data synced.
 
+## More Features
+- remove(db) - remove the data stored in Database
+- length(db) - return the length of data stored in Database
+- request(db) - fetch data from api (mostly get) and store the data in database for offline usage.
 
+### Usage/Examples
 ```javascript
 
 const query = {
@@ -71,13 +79,6 @@ vanillaDb.remove(query)
 
 ```
 query contains the database you stored your data and the key of the databsse you want to remove.
-
-## More Features
-
-- length(db) - return the length of data stored in Database
-- request(db) - fetch data from api (mostly get) and store the data in database for offline usage.
-
-### Usage/Examples
 
 ```javascript
 import { vanillaDb } from 'vanilla-db'
