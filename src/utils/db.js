@@ -2,13 +2,13 @@
 /* eslint-disable constructor-super */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-
+import { gen, generate } from '../asm/index'
 // set, get, remove, update, length, sync, request
 export class CreateStore {
   // eslint-disable-next-line no-useless-constructor
   constructor() {}
 
-  // work 0.0.4
+  // work 0.1.2
   set(config) {
     // config to set data
     // db: 'database choice local or session', key: 'database key', data: 'data to store
@@ -17,22 +17,21 @@ export class CreateStore {
     const src = {
       data,
       key,
-      DBinfo: {
-        lastUpdated: new Date().toDateString(),
-        type: typeof data
-      }
+      lastUpdated: new Date().toDateString(),
+      type: [typeof data],
+      Ox: gen()
     }
 
-    if (db === 'session') {
+    if (db === 'session' || db === 'sessionStorage') {
       CreateStore._sessionSet(key, JSON.stringify(src))
       return true
-    } else if (db === 'local') {
+    } else if (db === 'local' || db === 'localStorage') {
       CreateStore._localSet(key, JSON.stringify(src))
       return true
     }
   }
 
-  // works 0.0.4
+  // works 0.1.2
   get(query) {
     // query to get data
     // db: 'database choice local or session', key: 'database key'
@@ -88,9 +87,9 @@ export class CreateStore {
     // remove preconfig
     // db: 'database choice local or session', key: 'database key'
     const { db, key } = query
-    if (db === 'local') {
+    if (db === 'local' || db === 'localStorage') {
       localStorage.removeItem(key)
-    } else if (db === 'session') {
+    } else if (db === 'session' || db === 'sessionStorage') {
       sessionStorage.removeItem(key)
     }
   }
@@ -118,9 +117,9 @@ export class CreateStore {
 
   // length of data work 0.0.4
   length(db) {
-    if (db === 'local') {
+    if (db === 'local' || db === 'localStorage') {
       return localStorage.length
-    } else if (db === 'session') {
+    } else if (db === 'session' || db === 'sessionStorage') {
       return sessionStorage.length
     }
   }
@@ -129,19 +128,51 @@ export class CreateStore {
     // make request to get a data most get request, storage the data in db like caching
     // preconfig
     // db: 'database choice local or session', key: 'database key', url: 'api link to fetch data mostly get', options: 'fetch options if neccessary'
-    const { url, db, key, options } = config
+    const { url, db, key, option } = config
 
-    fetch(url, options)
+    fetch(url, option)
       .then((res) => res.json())
-      .then(async (data) => {
+      .then((data) => {
         const _config = {
           db,
           key,
-          data,
-          url
+          data
         }
 
         this.set(_config)
       })
+  }
+
+  auth(api) {
+    // store user session during there stay in a app
+    // return user hashed hash key and retrieve it
+    // generate new key
+    const newkey = generate()
+
+    const data = {
+      key: newkey,
+      api
+    }
+
+    const config = {
+      db: 'session',
+      key: 'Ox-auth',
+      data
+    }
+
+    this.set(config)
+    return newkey
+  }
+
+  user(newkey) {
+    const query = {
+      db: 'session',
+      key: 'Ox-auth'
+    }
+
+    const data = this.get(query)
+    const { api, key } = data
+    if (key === newkey) return api
+    return null
   }
 }

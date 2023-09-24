@@ -19,7 +19,22 @@ function generate() {
 
 
    const FULL = `0x${randomThree}${alphaOne[sync]}${alphaThree[syncThree]}${randomOne}${alphaTwo[syncTwo]}`
+
    return FULL
 } 
 
-export { generate }
+
+function gen() {
+
+   const alpha = ["iq", "jb", "kh", "lu", "mw", "nh", "oy", "Aq", "bV", "bc", "dj", "eK", "fyu", "gh", "APj", "bcV", "XZc", "djU", "uGK", "fGd", "cH", "JKt", "MhY",]
+
+   const random = Math.floor(Math.random() * 99999)
+
+   const sync = Math.floor(Math.random() * alpha.length)
+
+   const FULL = `0x${random}${alpha[sync]}${random}`
+
+   return FULL
+}
+
+export { generate, gen }

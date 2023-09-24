@@ -1,5 +1,5 @@
 import React, {useEffect, useState } from 'react'
-import { vanillaDb, vanillaAuth } from 'vanilla-db'
+import { vanillaDb } from 'vanilla-db'
 
 const App = () => {
   // store all players
@@ -35,14 +35,7 @@ const App = () => {
   }, [player])
 
   useEffect(() => {
-    //vanillaAuth.init('something like this that needed to be secured')
-    const query = {
-      db: 'session',
-      key: 'dummy-products'
-    }
-
-    const data = vanillaDb.get(query)
-    console.log(data)
+    //vanillaDb.auth('helleninah')
   }, [])
 
   const handle = e => {
@@ -67,6 +60,8 @@ const App = () => {
   const doThis = () => {
     //const t = vanillaAuth.user("0x4785906qlUzX54026XZc")
     //setAuth(t)
+    const t = vanillaDb.user('0x4920277QLuBtJ55268bc')
+    setAuth(t)
   }
 
   const handleDel = id => {
