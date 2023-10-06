@@ -1,66 +1,85 @@
 
 # VanillaDb
 
-VanillaDb is a tiny browser-based database library that is built on Browser local and session Storage.
+VanillaDb is a fast and lightweight browser-based database library that work seemelessly with all browsers localStorage and sessionStorage
 
 VanillaDb is built for developers that want to make use of Browser storage seamlessly when required in their projects.
 
-## Installation
-Install vanilla-DB using npm
+work seemlessly with all frontend libraries.
 
+## Installation
 ```bash
   npm install --save vanilla-db@latest
 ```
-
-## Usage/Examples
 Once the package is installed, you can import the library using import
 
 ### Store Data
+to store data using vanillaDb create an object containing
+db:  which can either be "local || localStorage" or "session || sessionStorage" 
+key: database key
+data: data you want to store.
+
 ```javascript
 import { vanillaDb } from 'vanilla-db'
 
 const config = {
   db: 'local' // 'session',
-  key: 'your database key' ,
-  data
+  key: 'my-data' ,
+  data: {
+    name: 'John Doe',
+    age: 34
+  }
 }
 
 vanillaDb.set(config)
 ```
-config contains db which can either be "local || localStorage" or "session || sessionStorage", your database key and the data you want to store.
+
 
 ### Get Data
+
+to Get your data using vanillaDb call the get and pass an object that contains 
+db: db you stored your data 
+key: database key.
+
 ```javascript
 const query = {
   db: 'local' // 'session',
-  key: 'your database key',
+  key: 'my-data',
   option: 'all' || 'only'
 }
 
 vanillaDb.get(query)
 
 ```
-query contains the db you stored your data and database key, and the option to either return all db or only data stored.
+you can also pass option to either return all the Database or only the data stored.
 
 ### Sync Data
+copy(sync) allow you to copy or move data within sessionStorage and localStorage, 
+to use copy(sync) create config object that contains 
+
+from: the database you can are copying/syncing which can either be local or session, 
+to: the new database you are copying/syncing to
+key: the key of the database you want to copy/sync.
+
+options contains 
+deleteOld: which can either be true or false to delete old stored data
+newKey: for the new data synced.
+
 ```javascript
 import { vanillaDb } from 'vanilla-db'
 
 const config = {
-  from: 'local' // 'session',
-  to: 'local' // 'session',
-  key: 'your database key' ,
+  from: 'local',
+  to: 'session',
+  key: 'my-data' ,
   options: {
       deleteOld: true // or false,
-      newKey: 'synced data new key'
+      newKey: 'my-synced-data'
   }
 }
 
 vanillaDb.sync(config)
 ```
-config contains the database you can are syncing from which can either be local or session, to, is the new database you are syncing to, key is the key of the database you want to sync.
-
-options contains deleteOld which can either be true or false to delete old stored data, and newKey for the data synced.
 
 ## More Features
 - remove(db) - remove the data stored in Database
