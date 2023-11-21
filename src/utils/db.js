@@ -12,6 +12,7 @@ export class CreateStore {
    set(config) {
       // config to set data
       // db: 'database choice local or session', key: 'database key', data: 'data to store
+
       const { db, key, data } = config
       // data can be number, string and object
       const src = {
