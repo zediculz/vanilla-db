@@ -1,8 +1,6 @@
 # VanillaDb
 
 VanillaDb is a lightweight browser database library thats built on top of localStorage and sessionStorage.
-VanillaDb work seemlessly with all javascript frontend libraries.
-
 
 ## Installation
 ```bash
@@ -12,20 +10,14 @@ Once the package is installed, you can import the library using import vanillaDb
 
 ```javascript
 import { vanillaDb } from 'vanilla-db'
-
 ```
 
 ## Documentation
 ### Storing Data 
 
-to store data using vanillaDb create an object with
-key: Database key,
-db:  which can either be "local || localStorage" or "session || sessionStorage" 
-data: the data you are storing (which can be arrays, object, or just a variable or state).
+to store data using vanillaDb
 
 ```javascript
-import { vanillaDb } from 'vanilla-db'
-
 const config = {
   db: 'local', // or 'session', 'localStorage', 'sessionStorage',
   key: 'my-database-key' ,
@@ -38,14 +30,15 @@ const config = {
 
 vanillaDb.set(config)
 ```
-VanillaDb uses key-value pair method in storing datas, you will be able to get the stored data by referencing its database key.
+to Get stored data, call the set() method and pass an object with
+key: Database key,
+db:  which can either be "local || localStorage" or "session || sessionStorage" ,
+data: the data you are storing (which can be arrays, object, or just a variable or state).
+
 
 
 ### Getting Data 
-
-to Get stored data, call the get() method and pass an object with
-db: the database data is stored
-key: database key.
+VanillaDb uses key-value pair method in storing datas, you will be able to get the stored data by referencing its database key.
 
 ```javascript
 const query = {
@@ -55,26 +48,17 @@ const query = {
 }
 
 vanillaDb.get(query)
-
 ```
-you can also pass option to either return all the Database or only the data stored.
+to Get stored data, call the get() method and pass an object with
+db: the database data is stored
+key: database key.
+option: to either return all the Database or only the data stored.
 
 
 ### Sync Data
 sync(copy) allow you to copy or move data within sessionStorage and localStorage, 
-to use sync(copy) create an object with
-
-from: the database you can are copying/syncing data from, 
-to: the new database you are copying/syncing to
-key: the key of the database you want to copy/sync.
-
-options contains 
-deleteOld: which can either be true or false to delete old stored data
-newKey: for the new data synced.
 
 ```javascript
-import { vanillaDb } from 'vanilla-db'
-
 const config = {
   from: 'local', 
   to: 'session',
@@ -88,6 +72,16 @@ const config = {
 vanillaDb.sync(config)
 ```
 
+to use sync(copy) create an object with
+
+from: the database you can are copying/syncing data from, 
+to: the new database you are copying/syncing to
+key: the key of the database you want to copy/sync.
+
+options contains 
+deleteOld: which can either be true or false to delete old stored data
+newKey: for the new data synced.
+
 ## More Features
 - remove(db) - remove the data stored in Database
 - length(db) - return the length of data stored in Database
@@ -95,7 +89,6 @@ vanillaDb.sync(config)
 
 ### Usage/Examples
 ```javascript
-
 const query = {
   db: 'local' // 'session',
   key: 'your database key',
@@ -107,12 +100,9 @@ vanillaDb.remove(query)
 query contains the database you stored your data and the key of the database you want to remove.
 
 ```javascript
-import { vanillaDb } from 'vanilla-db'
-
 const db =  'local' // 'session',
 
 vanillaDb.length(db)
-
 ```
 db is the Database you stored data or the Database you which to know its length.
 
