@@ -24,6 +24,7 @@ function generate() {
 } 
 
 
+/*
 function gen() {
 
    const alpha = ["iq", "jb", "kh", "lu", "mw", "nh", "oy", "Aq", "bV", "bc", "dj", "eK", "fyu", "gh", "APj", "bcV", "XZc", "djU", "uGK", "fGd", "cH", "JKt", "MhY",]
@@ -36,5 +37,6 @@ function gen() {
 
    return FULL
 }
+*/
 
-export { generate, gen }
+export { generate }

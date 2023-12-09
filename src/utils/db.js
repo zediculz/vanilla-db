@@ -2,7 +2,7 @@
 /* eslint-disable constructor-super */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-import { gen, generate } from '../asm/index'
+import { generate } from '../asm/index'
 // set, get, remove, update, length, sync, request
 export class CreateStore {
    // eslint-disable-next-line no-useless-constructor
@@ -19,8 +19,7 @@ export class CreateStore {
          data,
          key,
          lastUpdated: new Date().toDateString(),
-         type: [typeof data],
-         Ox: gen()
+         type: [typeof data]
       }
 
       if (db === 'session' || db === 'sessionStorage') {

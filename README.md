@@ -1,10 +1,8 @@
 # VanillaDb
 
-VanillaDb is a fast and lightweight browser-based database library that work seemelessly with all browsers localStorage and sessionStorage.
+VanillaDb is a lightweight browser database library thats built on top of localStorage and sessionStorage.
+VanillaDb work seemlessly with all javascript frontend libraries.
 
-VanillaDb is built for developers that want to make use of Browser storage seamlessly when required in their projects.
-
-work seemlessly with all frontend libraries.
 
 ## Installation
 ```bash
@@ -18,40 +16,41 @@ import { vanillaDb } from 'vanilla-db'
 ```
 
 ## Documentation
-### Store Data (Set)
+### Storing Data 
 
-to store data using vanillaDb create an object containing
+to store data using vanillaDb create an object with
+key: Database key,
 db:  which can either be "local || localStorage" or "session || sessionStorage" 
-key: the database key
-data: the data you want to store which can be arrays, object, or just a variable or state.
+data: the data you are storing (which can be arrays, object, or just a variable or state).
 
 ```javascript
 import { vanillaDb } from 'vanilla-db'
 
 const config = {
-  db: 'local' // 'session',
-  key: 'my-data' ,
+  db: 'local', // or 'session', 'localStorage', 'sessionStorage',
+  key: 'my-database-key' ,
   data: {
     name: 'John Doe',
-    age: 34
+    age: 40,
+    role: 'React Developer'
   }
 }
 
 vanillaDb.set(config)
 ```
-VanillaDb uses key-value pair method in storing datas, you will be able to get your stored data by referencing your database key.
+VanillaDb uses key-value pair method in storing datas, you will be able to get the stored data by referencing its database key.
 
 
-### Getting Data (Get)
+### Getting Data 
 
-to Get your data using vanillaDb call the vanilladb.get method and pass an object containing
-db: the database you choose to stored your data 
-key: your database key.
+to Get stored data, call the get() method and pass an object with
+db: the database data is stored
+key: database key.
 
 ```javascript
 const query = {
-  db: 'local' // 'session',
-  key: 'my-data',
+  db: 'local', // or 'session', 'localStorage', 'sessionStorage',
+  key: 'my-database-key',
   option: 'all' || 'only'
 }
 
@@ -60,11 +59,12 @@ vanillaDb.get(query)
 ```
 you can also pass option to either return all the Database or only the data stored.
 
-### Sync Data
-copy(sync) allow you to copy or move data within sessionStorage and localStorage, 
-to use copy(sync) create an object containing
 
-from: the database you can are copying/syncing data from, which can either be local or session, 
+### Sync Data
+sync(copy) allow you to copy or move data within sessionStorage and localStorage, 
+to use sync(copy) create an object with
+
+from: the database you can are copying/syncing data from, 
 to: the new database you are copying/syncing to
 key: the key of the database you want to copy/sync.
 
@@ -76,7 +76,7 @@ newKey: for the new data synced.
 import { vanillaDb } from 'vanilla-db'
 
 const config = {
-  from: 'local',
+  from: 'local', 
   to: 'session',
   key: 'my-data' ,
   options: {

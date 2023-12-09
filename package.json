@@ -1,7 +1,7 @@
 {
   "name": "vanilla-db",
-  "version": "0.1.22",
-  "description": "fast and lightweight browser-based database library that work seemelessly with all browsers localStorage and sessionStorage",
+  "version": "0.2",
+  "description": "lightweight browser database library thats built on top of localStorage and sessionStorage.",
   "author": "Seyifunmitan Muyiwa",
   "license": "MIT",
   "repository": "https://github.com/zediculz/vanilla-db",
@@ -51,6 +51,6 @@
     "dist"
   ],
   "keywords": [
-    "localStorage", "sessionStorage", "browser", "database", "frontend", "indexedDB", "react", "vue", "preact", "next", "svelte", "solid", "nuxt", "rust"
+    "localStorage", "sessionStorage", "browser", "database", "frontend", "indexedDB", "react", "vue", "preact", "next", "svelte", "solid", "nuxt", "svelteKit"
   ]
 }
