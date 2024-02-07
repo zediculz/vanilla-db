@@ -6,7 +6,7 @@ import { generate } from '../asm/index'
 // set, get, remove, update, length, sync, request
 export class CreateStore {
    // eslint-disable-next-line no-useless-constructor
-   constructor() {}
+   constructor() { }
 
    // work 0.1.2
    set(config) {
@@ -173,5 +173,26 @@ export class CreateStore {
       const { api, key } = data
       if (key === newkey) return api
       return null
+   }
+
+   alreadyExist(config) {
+      const { db, key } = config
+      if (db === 'local' || db === 'localStorage') {
+         const result = localStorage.getItem(key)
+         if (result === null) {
+            return false
+         } else {
+            return true
+         }
+      } else if (db === 'session' || db === 'sessionStorage') {
+         const result = sessionStorage.getItem(key)
+         if (result === null) {
+            return false
+         } else {
+            return true
+         }
+      } else {
+         console.error(`Error: DB Error:${db} is not correct`)
+      }
    }
 }

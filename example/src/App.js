@@ -31,6 +31,7 @@ const App = () => {
 
     const data = vanillaDb.get(query)
     console.log(data)
+    console.log('TEST: ', vanillaDb.alreadyExist({ db: 'session', key: "dummy-products" }))
     setPlayers(data)
   }, [player])
 

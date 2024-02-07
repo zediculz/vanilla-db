@@ -5,7 +5,7 @@
 
 export class CreateiStore {
   // eslint-disable-next-line no-useless-constructor
-  constructor() { }
+   constructor() {}
 
   // create db
   // with db name and version
